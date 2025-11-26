@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, Alert } from "react-native";
 
 export default function TelaFlashcards({ route, navigation }) {
-  const { deck } = route.params; // deck selecionado
+  const { deck } = route.params;
   const [flashcards, setFlashcards] = useState([]);
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
+
   const [studyMode, setStudyMode] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showBack, setShowBack] = useState(false);
+  const [userAnswer, setUserAnswer] = useState("");
+  const [showResult, setShowResult] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(null);
 
   // Criar flashcard
   const handleCreateFlashcard = () => {
@@ -16,23 +19,34 @@ export default function TelaFlashcards({ route, navigation }) {
       Alert.alert("Atenção", "Frente e verso não podem ser vazios.");
       return;
     }
+
     const newCard = {
       id: Date.now().toString(),
       front: front.trim(),
       back: back.trim(),
     };
-    setFlashcards((prev) => [...prev, newCard]);
+
+    setFlashcards(prev => [...prev, newCard]);
     setFront("");
     setBack("");
   };
 
-  // Avançar para próximo card
+  // Checar resposta
+  const checkAnswer = () => {
+    const correct = userAnswer.trim().toLowerCase() === flashcards[currentIndex].back.trim().toLowerCase();
+    setIsCorrect(correct);
+    setShowResult(true);
+  };
+
+  // Próximo card
   const handleNextCard = () => {
-    setShowBack(false);
+    setShowResult(false);
+    setUserAnswer("");
+
     if (currentIndex < flashcards.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      Alert.alert("Fim", "Você terminou de estudar este deck!");
+      Alert.alert("Fim!", "Você terminou o deck!");
       setStudyMode(false);
       setCurrentIndex(0);
     }
@@ -44,10 +58,10 @@ export default function TelaFlashcards({ route, navigation }) {
 
       {!studyMode ? (
         <>
-          {/* Lista de flashcards */}
+          {/* Lista */}
           <FlatList
             data={flashcards}
-            keyExtractor={(item) => item.id}
+            keyExtractor={item => item.id}
             renderItem={({ item }) => (
               <View style={styles.card}>
                 <Text style={styles.front}>{item.front}</Text>
@@ -59,23 +73,22 @@ export default function TelaFlashcards({ route, navigation }) {
           {/* Inputs */}
           <TextInput
             style={styles.input}
-            placeholder="Frente do cartão"
+            placeholder="Frente (ex: pergunta)"
             value={front}
             onChangeText={setFront}
           />
+
           <TextInput
             style={styles.input}
-            placeholder="Verso do cartão"
+            placeholder="Verso (ex: resposta correta)"
             value={back}
             onChangeText={setBack}
           />
 
-          {/* Botão criar */}
           <TouchableOpacity style={styles.button} onPress={handleCreateFlashcard}>
             <Text style={styles.buttonText}>Criar Flashcard</Text>
           </TouchableOpacity>
 
-          {/* Botão estudar */}
           {flashcards.length > 0 && (
             <TouchableOpacity
               style={[styles.button, styles.studyButton]}
@@ -85,7 +98,6 @@ export default function TelaFlashcards({ route, navigation }) {
             </TouchableOpacity>
           )}
 
-          {/* Botão voltar */}
           <TouchableOpacity
             style={[styles.button, styles.backButton]}
             onPress={() => navigation.goBack()}
@@ -95,25 +107,46 @@ export default function TelaFlashcards({ route, navigation }) {
         </>
       ) : (
         <>
-          {/* Modo estudo */}
+          {/* Modo Estudo */}
           <View style={styles.card}>
             <Text style={styles.front}>
-              {showBack ? flashcards[currentIndex].back : flashcards[currentIndex].front}
+              {flashcards[currentIndex].front}
             </Text>
           </View>
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => setShowBack(!showBack)}
-          >
-            <Text style={styles.buttonText}>
-              {showBack ? "Mostrar Frente" : "Mostrar Verso"}
-            </Text>
-          </TouchableOpacity>
+          {/* Usuário digita a resposta */}
+          {!showResult && (
+            <TextInput
+              style={styles.input}
+              placeholder="Digite sua resposta..."
+              value={userAnswer}
+              onChangeText={setUserAnswer}
+            />
+          )}
 
-          <TouchableOpacity style={styles.button} onPress={handleNextCard}>
-            <Text style={styles.buttonText}>Próximo</Text>
-          </TouchableOpacity>
+          {/* Mostrar resultado */}
+          {showResult && (
+            <View style={styles.card}>
+              <Text style={{ fontSize: 18, fontWeight: "bold", color: isCorrect ? "green" : "red" }}>
+                {isCorrect ? "✔ Resposta Correta!" : "✘ Resposta Errada"}
+              </Text>
+
+              <Text style={{ marginTop: 10 }}>
+                Correto: {flashcards[currentIndex].back}
+              </Text>
+            </View>
+          )}
+
+          {/* Botões de ação */}
+          {!showResult ? (
+            <TouchableOpacity style={styles.button} onPress={checkAnswer}>
+              <Text style={styles.buttonText}>Verificar Resposta</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity style={styles.button} onPress={handleNextCard}>
+              <Text style={styles.buttonText}>Próximo</Text>
+            </TouchableOpacity>
+          )}
 
           <TouchableOpacity
             style={[styles.button, styles.backButton]}
