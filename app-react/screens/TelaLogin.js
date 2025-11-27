@@ -1,12 +1,13 @@
 import React from "react";
-import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
+import {View, Text, TouchableOpacity, StyleSheet, Image} from "react-native";
 
 export default function TelaLogin({navigation}){
 
     return(
         <View style={styles.container}>
+
             <Text style={styles.title}>Bem-vindo ao App de estudos</Text>
-            <Text style={{margin: 3, fontSize: 16}}>
+            <Text style={{margin: 3, fontSize: 16, color: "white"}}>
                 Crie seus módulos e cartões de estudo...
             </Text>
 
@@ -25,13 +26,14 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
         paddingTop: 90,
-        backgroundColor: "#e5e5e5",
+        backgroundColor: "#282828ff",
     },
     title:{
         fontSize: 26,
         fontWeight: '600',
-        color: '#1A1A1A',
+        color: 'white',
         marginBottom: 6,
     },
     button:{

@@ -48,8 +48,9 @@ export default function TelaInicial({ navigation }) {
         <View style={styles.container}>
             <Text style={styles.title}>Seus Decks</Text>
 
+            <View style={{ flex: 1 }}>
             {/* Lista de decks */}
-            <FlatList
+            <FlatList style={{ flex: 1 }}
                 data={modules}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
@@ -68,7 +69,7 @@ export default function TelaInicial({ navigation }) {
                     </View>
                 )}
             />
-
+            </View>
             {/* Input */}
             <TextInput
                 style={styles.input}
@@ -90,7 +91,7 @@ export default function TelaInicial({ navigation }) {
             {/* Sair */}
             <TouchableOpacity
                 style={[styles.button, styles.logoutButton]}
-                onPress={() => navigation.navigate("Login")}
+                onPress={() => navigation.navigate("telaLogin")}
             >
                 <Text style={styles.buttonText}>Sair</Text>
             </TouchableOpacity>
@@ -99,41 +100,86 @@ export default function TelaInicial({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 20, backgroundColor: "#FFFFFF" },
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: "#282828ff",
+    },
+
     title: {
-        fontSize: 28,
+        fontSize: 30,
         fontWeight: "bold",
         marginBottom: 20,
-        color: "#222",
+        color: "#FFFFFF",
         textAlign: "center",
+        letterSpacing: 1,
     },
+
     input: {
-        height: 50,
-        borderColor: "#DDD",
+        height: 55,
         borderWidth: 1,
-        borderRadius: 10,
+        borderColor: "#333",
+        borderRadius: 12,
         paddingHorizontal: 15,
-        backgroundColor: "#FFF",
+        backgroundColor: "#2C2C2C",
         marginTop: 15,
         marginBottom: 10,
+        color: "white",
+        fontSize: 18,
     },
+
     button: {
-        backgroundColor: "#0077FF",
+        backgroundColor: "#006CFF",
         paddingVertical: 15,
-        borderRadius: 10,
+        borderRadius: 12,
         alignItems: "center",
-        marginBottom: 10,
+        marginBottom: 12,
+        elevation: 4,
+        shadowColor: "#000",
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        shadowOffset: { width: 0, height: 2 },
     },
-    buttonText: { color: "#FFF", fontSize: 16, fontWeight: "bold" },
-    logoutButton: { backgroundColor: "#FF3333" },
+
+    buttonText: {
+        color: "#FFF",
+        fontSize: 17,
+        fontWeight: "bold",
+    },
+
+    logoutButton: {
+        backgroundColor: "#D12E2E",
+    },
+
     deckItem: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: 10,
-        borderBottomWidth: 1,
-        borderColor: "#EEE",
+        backgroundColor: "#2C2C2C",
+        paddingVertical: 15,
+        paddingHorizontal: 12,
+        borderRadius: 12,
+        marginBottom: 10,
+
+        // sombra
+        elevation: 3,
+        shadowColor: "#000",
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        shadowOffset: { width: 0, height: 2 },
     },
-    deckText: { fontSize: 18, color: "#222" },
-    actionText: { color: "#0077FF", marginLeft: 10 },
+
+    deckText: {
+        fontSize: 18,
+        color: "#FFF",
+        fontWeight: "600",
+    },
+
+    actionText: {
+        color: "#FFD93D",
+        marginLeft: 12,
+        fontSize: 15,
+        fontWeight: "600",
+    },
 });
+
