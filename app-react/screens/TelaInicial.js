@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: "#282828ff",
+        backgroundColor: "#80bed1ff",
     },
 
     title: {
@@ -121,10 +121,10 @@ const styles = StyleSheet.create({
         borderColor: "#333",
         borderRadius: 12,
         paddingHorizontal: 15,
-        backgroundColor: "#2C2C2C",
+        backgroundColor: "#eeededff",
         marginTop: 15,
         marginBottom: 10,
-        color: "white",
+        color: "black",
         fontSize: 18,
     },
 
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "#2C2C2C",
+        backgroundColor: "#eee4e4ff",
         paddingVertical: 15,
         paddingHorizontal: 12,
         borderRadius: 12,
@@ -171,12 +171,12 @@ const styles = StyleSheet.create({
 
     deckText: {
         fontSize: 18,
-        color: "#FFF",
+        color: "#000000ff",
         fontWeight: "600",
     },
 
     actionText: {
-        color: "#FFD93D",
+        color: "#004aebff",
         marginLeft: 12,
         fontSize: 15,
         fontWeight: "600",

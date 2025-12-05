@@ -165,7 +165,7 @@ export default function TelaFlashcards({ route, navigation }) {
                 >
                   {isCorrect ? "✔ Resposta Correta!" : "✘ Resposta Errada"}
                 </Text>
-                <Text style={{ marginTop: 10, color: "white" }}>
+                <Text style={{ marginTop: 10 }}>
                   Correto: {flashcards[currentIndex].back}
                 </Text>
               </View>
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#282828ff",
+    backgroundColor: "#80bed1ff",
   },
 
   title: {
@@ -240,8 +240,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingHorizontal: 15,
     marginBottom: 12,
-    backgroundColor: "#2C2C2C",
-    color: "white",
+    backgroundColor: "#eeededff",
+    color: "black",
     fontSize: 17,
   },
   // BOTÕES PADRÃO
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 15,
     alignItems: "center",
-    backgroundColor: "#2C2C2C",
+    backgroundColor: "#eee4e4ff",
 
     // Sombras
     elevation: 3,
@@ -288,13 +288,13 @@ const styles = StyleSheet.create({
   front: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#FFFFFF",
+    color: "#000000ff",
     textAlign: "center",
   },
 
   back: {
     fontSize: 18,
-    color: "#CCCCCC",
+    color: "#212121ff",
     marginTop: 10,
     textAlign: "center",
   },
@@ -313,8 +313,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 12,
     alignItems: "center",
-
-    // Sombras
     elevation: 2,
     shadowColor: "#000",
     shadowOpacity: 0.2,

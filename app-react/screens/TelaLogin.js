@@ -5,19 +5,21 @@ export default function TelaLogin({navigation}){
 
     return(
         <View style={styles.container}>
-
-            <Text style={styles.title}>Bem-vindo ao App de estudos</Text>
-            <Text style={{margin: 3, fontSize: 16, color: "white"}}>
-                Crie seus módulos e cartões de estudo...
-            </Text>
-
-            <TouchableOpacity style={styles.button}
-                onPress={() => navigation.navigate('telaInicial')}>
-                <Text style={{fontSize: 18, fontWeight: '600', color: "white"}}>
-                    Começar
+            
+            <View style={styles.top}>
+                <Text style={styles.title}>Bem-vindo ao App de estudos</Text>
+                <Text style={{margin: 3, fontSize: 16, color: "white"}}>
+                    Crie seus módulos e cartões de estudo...
                 </Text>
-            </TouchableOpacity>
 
+                <TouchableOpacity style={styles.button}
+                    onPress={() => navigation.navigate('telaInicial')}>
+                    <Text style={{fontSize: 18, fontWeight: '600', color: "white"}}>
+                        Começar
+                    </Text>
+                </TouchableOpacity>
+
+            </View>
         </View>
     );
 }
@@ -28,7 +30,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: 90,
-        backgroundColor: "#282828ff",
+        backgroundColor: "#e0e0e0ff",
+    },
+    top:{
+        backgroundColor: "#009dcdff",
+        borderRadius: 15,
+        maxWidth: 350,
+        padding: 10,
+        height: 400,
+        display: 'flex',
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOpacity: 0.15,
+        shadowRadius: 10,
     },
     title:{
         fontSize: 26,
@@ -37,12 +51,13 @@ const styles = StyleSheet.create({
         marginBottom: 6,
     },
     button:{
-        backgroundColor: "#0623ffff",
-        padding: 15,
-        borderRadius: 8,
+        backgroundColor: "#0084acff",
+        padding: 12,
+        borderRadius: 25,
         width: 150,
         margin: 30,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 70 
     }
 })
 
